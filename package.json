@@ -1,0 +1,37 @@
+{
+  "name": "ootp-league-site-template",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "demo": "node scripts/demo/generate.mjs",
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test scripts/import/*.test.ts tests/*.test.ts",
+    "data:import": "tsx scripts/import/run.ts",
+    "data:lahman": "node scripts/data/fetch-lahman.mjs"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.16.1",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.16.1",
+  "type": "module",
+  "dependencies": {
+    "csv-parse": "^7.0.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  }
+}

@@ -1,0 +1,27 @@
+.demo-banner {
+  background: #fff6e2;
+  border-bottom: 1px solid #e6c987;
+  color: #473300;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.demo-banner__inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+.demo-banner__tag {
+  padding: 3px 7px;
+  border-radius: 2px;
+  background: #513a00;
+  color: #fff;
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#102d3d" />
+  <path d="M0 423 960 194v346H0Z" fill="#153e4a" />
+  <path d="M0 446 960 217" fill="none" stroke="#3f706e" stroke-width="2" opacity=".5" />
+  <circle cx="720" cy="270" r="216" fill="#1e4d55" />
+  <circle cx="720" cy="270" r="186" fill="none" stroke="#5f918a" stroke-width="2" />
+  <circle cx="720" cy="270" r="161" fill="none" stroke="#5f918a" stroke-width="1" opacity=".6" />
+  <path d="M720 88 902 270 720 452 538 270Z" fill="none" stroke="#a7c9bd" stroke-width="3" />
+  <path d="M538 270h364M720 88v364" fill="none" stroke="#81aaa1" stroke-width="1" opacity=".55" />
+  <g fill="#d7e9df">
+    <path d="m720 104 9 9-9 9-9-9ZM877 270l9-9 9 9-9 9ZM720 418l9 9-9 9-9-9ZM545 270l9-9 9 9-9 9Z" />
+  </g>
+  <circle cx="720" cy="270" r="72" fill="#f7f5ed" />
+  <g fill="none" stroke="#b34a40" stroke-linecap="round" stroke-width="4">
+    <path d="M671 219c24 23 24 79 0 102M769 219c-24 23-24 79 0 102" />
+    <path d="m677 230 11-4m-7 19 12-3m-10 20 12-1m-12 20 12 2m-14 17 11 4m-15 16 10 5M763 230l-11-4m7 19-12-3m10 20-12-1m12 20-12 2m14 17-11 4m15 16-10 5" />
+  </g>
+  <path d="M64 76h45" stroke="#e18a72" stroke-width="5" stroke-linecap="square" />
+</svg>

@@ -1,0 +1,108 @@
+name: Deploy private OOTP feed to public Pages
+
+on:
+  workflow_dispatch:
+  # A scheduled event is inert unless OOTP_ENABLE_SCHEDULED_DEPLOY == 'true'.
+  # Opted-in runs perform the full import/build/deploy even if nothing changed.
+  schedule:
+    - cron: '17 4 * * *' # 04:17 UTC daily; modify only after choosing a cadence.
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ootp-pages-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && vars.OOTP_ENABLE_SCHEDULED_DEPLOY == 'true') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Check out the selected trusted revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Install dependencies and deployment CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install -g pnpm@12.16.1 --no-audit --no-fund
+          pnpm install --frozen-lockfile
+          npm install --prefix "$RUNNER_TEMP/ootp-wrangler" --no-audit --no-fund wrangler@4.47.0
+      - name: Fetch and validate completed private R2 export
+        shell: bash
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY: ${{ secrets.R2_ACCESS_KEY }}
+          R2_SECRET_KEY: ${{ secrets.R2_SECRET_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_KEY: ${{ vars.R2_KEY }}
+          OOTP_LEAGUE_ID: ${{ vars.OOTP_LEAGUE_ID }}
+        run: |
+          set -euo pipefail
+          python3 scripts/feed/fetch_export.py "$RUNNER_TEMP/ootp-feed"
+      - name: Import and validate league data
+        shell: bash
+        env:
+          OOTP_LEAGUE_ID: ${{ vars.OOTP_LEAGUE_ID }}
+        run: |
+          set -euo pipefail
+          export OOTP_LEAGUE_ID="${OOTP_LEAGUE_ID:-203}"
+          # Logs may contain league data; do not put them in public Actions logs.
+          trap 'rm -f "$RUNNER_TEMP/ootp-import.log"' EXIT
+          if ! pnpm data:import --in "$RUNNER_TEMP/ootp-feed/drop/csv" \
+              --out "$RUNNER_TEMP/ootp-data" --photos "$RUNNER_TEMP/ootp-feed/drop/photos" \
+              --logs "$RUNNER_TEMP/ootp-feed/drop/logs" >"$RUNNER_TEMP/ootp-import.log" 2>&1; then
+            echo 'Import failed; check the export locally before retrying.' >&2
+            exit 1
+          fi
+          python3 -c 'import json,sys; sys.exit(0 if json.load(open(sys.argv[1]))["ok"] is True else 1)' "$RUNNER_TEMP/ootp-data/import-report.json" || {
+            echo 'Import validation failed; check the export locally before retrying.' >&2
+            exit 1
+          }
+          # The report is a private diagnostic, not a public site asset.
+          rm -- "$RUNNER_TEMP/ootp-data/import-report.json"
+          rm -rf public/data
+          mv "$RUNNER_TEMP/ootp-data" public/data
+      - name: Build site
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm build
+      - name: Deploy public site to Cloudflare Pages
+        shell: bash
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+          CLOUDFLARE_PAGES_BRANCH: ${{ vars.CLOUDFLARE_PAGES_BRANCH }}
+        run: |
+          set -euo pipefail
+          export CLOUDFLARE_PAGES_BRANCH="${CLOUDFLARE_PAGES_BRANCH:-main}"
+          python3 - <<'PY'
+          import os, re, sys
+          account = os.environ.get('CLOUDFLARE_ACCOUNT_ID', '')
+          token = os.environ.get('CLOUDFLARE_API_TOKEN', '')
+          project = os.environ.get('CLOUDFLARE_PAGES_PROJECT', '')
+          branch = os.environ.get('CLOUDFLARE_PAGES_BRANCH', '')
+          if (not re.fullmatch(r'[0-9a-fA-F]{32}', account)
+                  or not re.fullmatch(r'[A-Za-z0-9_-]{1,256}', token)
+                  or not re.fullmatch(r'[a-z0-9](?:[a-z0-9-]{0,56}[a-z0-9])?', project)
+                  or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._/-]{0,99}', branch)
+                  or '..' in branch or branch.endswith('/') or '//' in branch):
+              sys.exit('Invalid Pages configuration; no deployment attempted.')
+          PY
+          trap 'rm -f "$RUNNER_TEMP/ootp-deploy.log"' EXIT
+          if ! "$RUNNER_TEMP/ootp-wrangler/node_modules/.bin/wrangler" pages deploy dist \
+              --project-name="$CLOUDFLARE_PAGES_PROJECT" --branch="$CLOUDFLARE_PAGES_BRANCH" \
+              --commit-dirty=true >"$RUNNER_TEMP/ootp-deploy.log" 2>&1; then
+            echo 'Pages deployment failed; verify project, branch, token permissions and Pages limits.' >&2
+            exit 1
+          fi
+          echo 'Deployment completed. Pages contents are publicly accessible.'

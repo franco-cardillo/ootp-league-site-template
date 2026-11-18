@@ -1,0 +1,16 @@
+{
+  "routes": [
+    { "path": "/", "title": "Home" },
+    { "path": "/scores", "title": "Scores" },
+    { "path": "/standings", "title": "Standings" },
+    { "path": "/teams", "title": "Teams" },
+    { "path": "/teams/:teamId", "title": "Team Profile" },
+    { "path": "/players", "title": "Players" },
+    { "path": "/players/:playerId", "title": "Player Profile" },
+    { "path": "/prospects", "title": "Prospects" },
+    { "path": "/prospects/:prospectId", "title": "Prospect Profile" },
+    { "path": "/statistics", "title": "Statistics" },
+    { "path": "/history", "title": "History" },
+    { "path": "/watchlist", "title": "My Watchlist" }
+  ]
+}

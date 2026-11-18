@@ -1,0 +1,314 @@
+/* Responsive rules. Loaded last so it wins over the desktop declarations. */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  min-width: 0;
+}
+
+@media (max-width: 980px) {
+  .home-row {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .home-col--lead {
+    order: -1;
+  }
+
+  .stack,
+  .grid-main > aside {
+    gap: var(--sp-4);
+  }
+}
+
+@media (max-width: 760px) {
+  .container {
+    padding: 0 14px;
+  }
+
+  .page {
+    padding-block: var(--sp-4) var(--sp-6);
+  }
+
+  /* masthead: logo left, season chip right, search hidden */
+  .masthead__inner {
+    height: auto;
+    min-height: 56px;
+    padding: 8px 0;
+    gap: var(--sp-3);
+    flex-wrap: nowrap;
+  }
+
+  .wordmark__mark {
+    height: 32px;
+  }
+
+  .wordmark__title {
+    font-size: 13px;
+    line-height: 1.05;
+    letter-spacing: 0.08em;
+  }
+
+  .wordmark__sub {
+    display: none;
+  }
+
+  .masthead__meta {
+    gap: var(--sp-2);
+  }
+
+  .masthead__search {
+    display: none;
+  }
+
+  .masthead__season {
+    font-size: 10px;
+    padding: 4px 7px;
+    white-space: nowrap;
+  }
+
+  /* scoreboard rail and nav scroll sideways instead of overflowing the page */
+  .rail__inner,
+  .nav__inner {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .rail__inner {
+    padding: 0 14px;
+  }
+
+  .rail__tag {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--ink);
+    padding-right: var(--sp-3);
+  }
+
+  .nav__link {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 12px 10px;
+    white-space: nowrap;
+  }
+
+  /* page headers and heroes stack */
+  .page-header h1,
+  .page-header title {
+    font-size: 30px;
+  }
+
+  .player-hero {
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    padding: var(--sp-4) 0;
+  }
+
+  .player-hero__avatar,
+  .player-hero__photo {
+    width: 76px;
+    height: 76px;
+  }
+
+  .player-hero h1,
+  .player-hero__name {
+    font-size: 28px;
+    line-height: 1.05;
+  }
+
+  .player-hero__number {
+    font-size: 26px;
+  }
+
+  .player-hero__stats {
+    width: 100%;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--sp-2);
+  }
+
+  .player-hero__stat-value {
+    font-size: 22px;
+  }
+
+  /* tables scroll inside their card rather than pushing the page */
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+
+  .stat-table {
+    min-width: 560px;
+  }
+
+  .stat-table--tight {
+    min-width: 460px;
+  }
+
+  /* box score */
+  .boxscore-head {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: var(--sp-2);
+    padding: var(--sp-3) 0;
+  }
+
+  .boxscore-head__score {
+    font-size: 32px;
+  }
+
+  .boxscore-head__side img,
+  .boxscore-head__side svg {
+    width: 42px;
+    height: 42px;
+  }
+
+  .team-logo--lg {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .box-team__head h2 {
+    font-size: 17px;
+  }
+
+  .box-team__runs {
+    font-size: 22px;
+  }
+
+  /* chips wrap instead of clipping */
+  .scope-chips {
+    flex-wrap: wrap;
+  }
+
+  /* career and leaders grids go two-up */
+  .career-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .overall-cell__value {
+    font-size: 24px;
+  }
+
+  .leader-row {
+    grid-template-columns: 16px minmax(0, 1fr) auto !important;
+    gap: 8px;
+  }
+
+  .leader-row .muted {
+    display: none;
+  }
+
+  .home-lead__headline,
+  .lead__headline {
+    font-size: 28px;
+  }
+
+  .box__row {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .wordmark__title {
+    font-size: 12px;
+  }
+
+  .player-hero__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .career-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ---- second pass: containment and hero stacking ---- */
+
+@media (max-width: 760px) {
+  #root {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .nav__inner,
+  .rail__inner {
+    gap: 14px;
+  }
+
+  .nav__link,
+  .rail__game,
+  .rail__tag {
+    flex: 0 0 auto;
+  }
+
+  .wordmark {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .wordmark__title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* The league name is longer than the old three-letter block, so it gets the room the
+       mark no longer needs — still capped so the season chip never leaves the viewport. */
+    max-width: 60vw;
+  }
+
+  .page-header,
+  .home-lead,
+  .lead__title,
+  .lead__deck,
+  .kicker {
+    max-width: 100%;
+  }
+
+  .lead__title {
+    font-size: clamp(26px, 8vw, 40px) !important;
+    overflow-wrap: anywhere;
+  }
+
+  .player-hero .player-hero__stats,
+  .player-hero__stats {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    gap: var(--sp-2) !important;
+    padding: 0 !important;
+    margin-top: var(--sp-3) !important;
+    border-left: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding-top: var(--sp-3) !important;
+  }
+
+  .player-hero .player-hero__stat-value {
+    font-size: 24px !important;
+  }
+
+  .player-hero .player-hero__name,
+  .player-hero h1 {
+    font-size: clamp(24px, 7.5vw, 34px) !important;
+    overflow-wrap: anywhere;
+  }
+
+  .player-hero {
+    flex-wrap: wrap !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .player-hero .player-hero__stats,
+  .player-hero__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

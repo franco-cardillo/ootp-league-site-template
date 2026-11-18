@@ -1,0 +1,225 @@
+/* This route owns its broadcast palette; no global colors or layout are changed. */
+.prospects-board {
+  background: #0c0c0d;
+  color: #f5f5f5;
+  min-height: 70vh;
+  padding: 42px 0 64px;
+}
+.prospects-board__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.prospects-board__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 310px);
+  align-items: end;
+  gap: 36px;
+  padding: 0 0 30px;
+  border-bottom: 1px solid #3b3b3d;
+}
+.prospects-board__eyebrow,
+.prospects-board__edition,
+.prospects-board__section-index,
+.prospects-board__live-label,
+.prospects-board__summary,
+.prospects-board__field > span,
+.prospects-board__filter-group legend,
+.prospects-board__footer-note {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.prospects-board__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #e2e2e2;
+  font-size: 12px;
+}
+.prospects-board__eyebrow > span {
+  width: 26px;
+  height: 4px;
+  background: #e00015;
+}
+.prospects-board__eyebrow b,
+.prospects-board__edition span,
+.prospects-board__footer-note b { color: #ee2535; }
+.prospects-board__hero h1 {
+  margin: 15px 0 12px;
+  font-family: var(--display);
+  font-size: clamp(54px, 8vw, 104px);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: .78;
+  text-transform: uppercase;
+}
+.prospects-board__hero h1 span {
+  display: block;
+  margin-top: 11px;
+  color: #ee2535;
+  font-size: .39em;
+  letter-spacing: .045em;
+  line-height: 1;
+}
+.prospects-board__deck { color: #b6b6b9; font-size: 15px; line-height: 1.6; max-width: 560px; }
+.prospects-board__hero-side {
+  border-left: 3px solid #dd0014;
+  padding: 2px 0 2px 18px;
+}
+.prospects-board__edition { color: #fff; font-size: 12px; }
+.prospects-board__hero-side p { margin-top: 8px; color: #b7b7bb; font-size: 12px; line-height: 1.6; }
+.prospects-board__summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(200px, 1.3fr);
+  background: #171719;
+  border-bottom: 3px solid #c90013;
+  font-size: 10px;
+  color: #a5a5a9;
+}
+.prospects-board__summary > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 88px;
+  padding: 15px 20px;
+  border-right: 1px solid #303034;
+}
+.prospects-board__summary > div:last-child { border-right: 0; }
+.prospects-board__summary-value { color: #fff; font-size: 29px; letter-spacing: 0; line-height: 1; margin-bottom: 7px; }
+.prospects-board__summary-note { gap: 5px; letter-spacing: .05em; line-height: 1.35; }
+.prospects-board__summary-note strong { color: #f02e3e; letter-spacing: .14em; }
+.prospects-board__filters { padding: 34px 0 30px; }
+.prospects-board__section-heading,
+.prospects-board__results-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.prospects-board__section-heading > div,
+.prospects-board__results-head > div { display: flex; align-items: center; gap: 11px; }
+.prospects-board__section-heading h2,
+.prospects-board__results-head h2 { font-size: 23px; font-weight: 700; letter-spacing: .025em; text-transform: uppercase; }
+.prospects-board__section-index { color: #ed293a; font-size: 12px; }
+.prospects-board__reset { color: #c4c4c7; font-size: 12px; padding: 6px 0 6px 8px; }
+.prospects-board__reset span { color: #ec2b3a; font-size: 17px; margin-left: 4px; }
+.prospects-board__reset:disabled { color: #747478; cursor: default; }
+.prospects-board__reset:disabled span { color: #747478; }
+.prospects-board__filter-grid { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 12px; margin-top: 20px; }
+.prospects-board__field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.prospects-board__field > span,
+.prospects-board__filter-group legend { color: #aaaab0; font-size: 11px; }
+.prospects-board__field input,
+.prospects-board__field select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid #414146;
+  border-radius: 2px;
+  background: #1b1b1e;
+  color: #f5f5f5;
+  font: inherit;
+  font-size: 13px;
+}
+.prospects-board__field input::placeholder { color: #96969b; }
+.prospects-board__filter-groups { display: flex; flex-wrap: wrap; gap: 16px 30px; margin-top: 19px; }
+.prospects-board__filter-group { margin: 0; padding: 0; border: 0; min-width: 0; }
+.prospects-board__filter-group legend { margin-bottom: 7px; padding: 0; }
+.prospects-board__chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.prospects-board__chips button {
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid #46464b;
+  border-radius: 2px;
+  background: #1a1a1c;
+  color: #d7d7d9;
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+.prospects-board__chips--position button { min-width: 39px; }
+.prospects-board__chips button:hover { border-color: #f04a57; color: #fff; }
+.prospects-board__chips button.is-active { background: #cb0013; border-color: #cb0013; color: #fff; }
+.prospects-board :is(button, input, select, a, .prospects-board__table-scroll):focus-visible { outline: 2px solid #ff5b68; outline-offset: 3px; }
+.prospects-board__filter-note { margin-top: 14px; color: #a6a6aa; font-size: 11px; line-height: 1.55; }
+.prospects-board__results { border-top: 2px solid #e00015; background: #141416; }
+.prospects-board__results-head { min-height: 60px; padding: 16px 20px; border-bottom: 1px solid #363639; }
+.prospects-board__results-head p { color: #bdbdc0; font-size: 12px; white-space: nowrap; }
+.prospects-board__live-label { padding: 4px 6px; border: 1px solid #623038; color: #f25b66; font-size: 9px; }
+.prospects-board__ranking-note,
+.prospects-board__comp-note { padding: 11px 20px; color: #b2b2b6; font-size: 11px; line-height: 1.5; border-bottom: 1px solid #303033; }
+.prospects-board__scroll-hint { display: none; padding: 9px 16px; color: #b2b2b6; font-size: 11px; }
+.prospects-board__scroll-hint span { color: #f04352; }
+.prospects-board__table-scroll { overflow-x: auto; scrollbar-color: #68686e #202023; }
+.prospects-board__table { width: 100%; min-width: 1260px; border-collapse: collapse; font-variant-numeric: tabular-nums; text-align: left; }
+.prospects-board__table th {
+  padding: 12px 10px;
+  background: #222225;
+  border-bottom: 1px solid #3a3a3d;
+  color: #b3b3b8;
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.prospects-board__table th span { color: #89898e; font-weight: 500; letter-spacing: .03em; }
+.prospects-board__table th:first-child,
+.prospects-board__table td:first-child { padding-left: 20px; }
+.prospects-board__table th:last-child,
+.prospects-board__table td:last-child { padding-right: 20px; }
+.prospects-board__table td { padding: 11px 10px; border-bottom: 1px solid #2d2d30; color: #d1d1d4; font-size: 12px; vertical-align: middle; white-space: nowrap; }
+.prospects-board__table tbody tr:hover { background: #202023; }
+.prospects-board__table tbody tr:last-child td { border-bottom: 0; }
+.prospects-board__table .prospects-board__rank { color: #fff; font-family: var(--display); font-size: 17px; font-weight: 700; }
+.prospects-board__table .prospects-board__bnn { color: #f16a75; font-family: var(--display); font-size: 13px; font-weight: 700; }
+.prospects-board__player { display: inline-flex; align-items: center; gap: 9px; color: #fff; font-weight: 700; }
+.prospects-board__player:hover { color: #ff6874; }
+.prospects-board__player .avatar { background: #ebebeb; }
+.prospects-board__table .prospects-board__org { color: #fff; font-family: var(--display); font-weight: 700; }
+.prospects-board__league { color: #919198; font-size: 10px; margin-left: 3px; }
+.prospects-board__table .prospects-board__potential { color: #fff; font-weight: 800; }
+.prospects-board__comp { display: block; min-width: 210px; max-width: 250px; color: #dddde0; line-height: 1.4; white-space: normal; }
+.prospects-board__comp-slot { display: block; }
+.prospects-board__comp-slot + .prospects-board__comp-slot { margin-top: 8px; }
+.prospects-board__comp-label { color: #b8b8bd; font-weight: 700; }
+.prospects-board__comp-link { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+.prospects-board__comp-link:hover { color: #ff8992; }
+.prospects-board__comp-reason { display: block; margin-top: 2px; color: #b2b2b6; font-size: 11px; }
+.prospects-board__muted { color: #96969a; }
+.prospects-board__state { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 55px 24px; color: #c6c6c9; text-align: center; font-size: 13px; }
+.prospects-board__state strong { color: #fff; font-size: 16px; }
+.prospects-board__state button { margin-top: 8px; padding: 8px 14px; background: #cb0013; color: #fff; font-size: 12px; font-weight: 700; }
+.prospects-board__state--error { color: #ff8c95; }
+.prospects-board__footer-note { display: flex; justify-content: space-between; gap: 15px; padding-top: 20px; color: #8e8e93; font-size: 10px; }
+@media (max-width: 800px) {
+  .prospects-board__hero { grid-template-columns: 1fr; gap: 20px; }
+  .prospects-board__hero-side { max-width: 460px; }
+  .prospects-board__summary { grid-template-columns: repeat(3, 1fr); }
+  .prospects-board__summary-note { grid-column: 1 / -1; border-top: 1px solid #303034; min-height: 60px !important; }
+  .prospects-board__filter-grid { grid-template-columns: 1fr 1fr; }
+  .prospects-board__field:first-child { grid-column: 1 / -1; }
+  .prospects-board__scroll-hint { display: block; }
+}
+@media (max-width: 520px) {
+  .prospects-board { padding-top: 30px; }
+  .prospects-board__inner { padding: 0 16px; }
+  .prospects-board__hero h1 { font-size: clamp(52px, 14vw, 74px); }
+  .prospects-board__summary > div { padding: 14px 10px; }
+  .prospects-board__summary-value { font-size: 25px; }
+  .prospects-board__summary { font-size: 9px; }
+  .prospects-board__results-head { padding: 14px 12px; }
+  .prospects-board__results-head > div { gap: 7px; }
+  .prospects-board__results-head h2 { font-size: 20px; }
+  .prospects-board__results-head p { font-size: 11px; }
+  .prospects-board__ranking-note,
+  .prospects-board__comp-note { padding: 10px 12px; }
+  .prospects-board__footer-note { flex-direction: column; gap: 5px; }
+}

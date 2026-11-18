@@ -1,0 +1,10 @@
+# Copy to ~/.ootpverse-feed.conf, then chmod 600 that file.
+# This is a trusted shell-sourced configuration: edit it locally, never commit it.
+# OOTP_LG='/path/to/Your League.lg'
+# OOTP_LEAGUE_ID=203
+# OOTPVERSE_REPO='/path/to/your-clone'
+# R2_ACCOUNT_ID='YOUR_32_HEX_CHARACTER_ACCOUNT_ID'
+# R2_ACCESS_KEY='YOUR_R2_ACCESS_KEY_ID'
+# R2_SECRET_KEY='YOUR_R2_SECRET_ACCESS_KEY'
+# R2_BUCKET='your-private-bucket'
+# R2_KEY='export.zip'
